@@ -255,11 +255,18 @@ QImage* ImageUtil::brightness(QImage* img, double multiplier)
     QImage* newImg = new QImage;
     *newImg = img->copy();
     uchar* imgData = newImg->bits();
+    double arr[256];
+    for (int x = 0; x < 256; x++)
+    {
+        arr[x] = std::exp(5*x) / (std::exp(5*x)) + 1;
+    }
+
     for (int i = 0; i < newImg->width() * newImg->height() * 3; i++)
     {
-        double x = (double)imgData[i] / 255;
-        double result = std::pow(x, std::pow(10, multiplier));
-        imgData[i] = (uchar)(result*255);
+        // double x = (double)imgData[i] / 255;
+        // double result = std::pow(x, std::pow(10, multiplier));
+
+        imgData[i] = (uchar)(arr[imgData[i]]);
     }
     return newImg;
 }
