@@ -238,17 +238,30 @@ QImage* ImageUtil::invert(QImage* img)
     return newImg;
 }
 
-QImage* ImageUtil::contrast(QImage* img)
+QImage* ImageUtil::contrast(QImage* img, double multiplier)
 {
     QImage* newImg = new QImage;
     *newImg = img->copy();
     uchar* imgData = newImg->bits();
+    double arr[256];
+    for (int x = 0; x < 256; x++)
+    {
+        double localX = (double)x / 255;
+        double exp = std::exp(multiplier * (localX - 0.5));
+        arr[x] = (exp / (exp + 1)) * 255;
+        qDebug() << x << ": " << arr[x];
+    }
+
     for (int i = 0; i < newImg->width() * newImg->height() * 3; i++)
     {
-        imgData[i] = (uchar)(255 - imgData[i]);
+        // double x = (double)imgData[i] / 255;
+        // double result = std::pow(x, std::pow(10, multiplier));
+
+        imgData[i] = (uchar)(arr[imgData[i]]);
     }
     return newImg;
 }
+
 
 QImage* ImageUtil::brightness(QImage* img, double multiplier)
 {
@@ -258,7 +271,10 @@ QImage* ImageUtil::brightness(QImage* img, double multiplier)
     double arr[256];
     for (int x = 0; x < 256; x++)
     {
-        arr[x] = std::exp(5*x) / (std::exp(5*x)) + 1;
+        double localX = (double)x / 255;
+        double exp = std::exp(multiplier * (localX - 0.5));
+        arr[x] = (exp / (exp + 1)) * 255;
+        qDebug() << x << ": " << arr[x];
     }
 
     for (int i = 0; i < newImg->width() * newImg->height() * 3; i++)

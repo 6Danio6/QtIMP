@@ -26,7 +26,7 @@ public:
 
     static QImage* desaturate(QImage* img);
     static QImage* invert(QImage* img);
-    static QImage* contrast(QImage* img);
+    static QImage* contrast(QImage* img, double multiplier);
     static QImage* brightness(QImage* img, double multiplier);
 };
 

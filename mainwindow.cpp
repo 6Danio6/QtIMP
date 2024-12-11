@@ -141,11 +141,42 @@ void MainWindow::on_actionInvert_triggered()
 
 void MainWindow::on_actionContrast_triggered()
 {
-    lastImg = img;
-    img = ImageUtil::contrast(img);
-    pixmap = QPixmap::fromImage(*img);
-    ui->imageDisplay->setPixmap(pixmap);
-    ui->actionUndo->setEnabled(true);
+    QMessageBox *dialog = new QMessageBox(ui->centralWidget);
+    // dialog->setModal(true);
+    dialog->setWindowTitle("Change contrast");
+    dialog->setText("Change contrast");
+    dialog->setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+    dialog->setDefaultButton(QMessageBox::Save);
+    dialog->setContentsMargins(50, 50, 50, 50);
+    QSlider *slider = new QSlider(Qt::Horizontal, dialog);
+    slider->setRange(5, 25);
+    slider->setValue(15);
+    slider->setContentsMargins(20, 20, 20, 20);
+    slider->setTickPosition(QSlider::TicksBothSides);
+    slider->setTickInterval(10);
+
+    int returned = dialog->exec();
+    switch (returned)
+    {
+    case QMessageBox::Save:
+    {
+        // Save was clicked
+        double sliderValue = -(double)slider->value() / 10;
+        lastImg = img;
+        img = ImageUtil::contrast(img, sliderValue);
+        pixmap = QPixmap::fromImage(*img);
+        ui->imageDisplay->setPixmap(pixmap);
+        ui->actionUndo->setEnabled(true);
+
+        break;
+    }
+    case QMessageBox::Cancel:
+        // Cancel was clicked
+        break;
+    default:
+        // should never be reached
+        break;
+    }
 }
 
 void MainWindow::on_actionBrightness_triggered()
