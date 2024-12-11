@@ -6,21 +6,56 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>652</width>
+    <height>398</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
+   <widget class="QLabel" name="imageDisplay">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>511</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open a &lt;a href=&quot;https://en.wikipedia.org/wiki/Netpbm&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;PNM file&lt;/span&gt;&lt;/a&gt; or create a new image to start!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>652</width>
      <height>22</height>
     </rect>
    </property>
@@ -36,15 +71,30 @@
     <property name="title">
      <string>Edit</string>
     </property>
+    <addaction name="actionUndo"/>
    </widget>
    <widget class="QMenu" name="menuFilters">
     <property name="title">
      <string>Filters</string>
     </property>
+    <addaction name="actionDesaturation"/>
+    <addaction name="actionBrightness"/>
+    <addaction name="actionContrast"/>
+    <addaction name="actionSaturation"/>
+    <addaction name="actionInvert"/>
+   </widget>
+   <widget class="QMenu" name="menuPixel_arithmetic">
+    <property name="title">
+     <string>Image arithmetic</string>
+    </property>
+    <addaction name="actionAddition"/>
+    <addaction name="actionSubtraction"/>
+    <addaction name="actionMultiplication"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuFilters"/>
+   <addaction name="menuPixel_arithmetic"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -59,6 +109,54 @@
   <action name="actionSave">
    <property name="text">
     <string>Save</string>
+   </property>
+  </action>
+  <action name="actionDesaturation">
+   <property name="text">
+    <string>Desaturation</string>
+   </property>
+  </action>
+  <action name="actionContrast">
+   <property name="text">
+    <string>Contrast</string>
+   </property>
+  </action>
+  <action name="actionBrightness">
+   <property name="text">
+    <string>Brightness</string>
+   </property>
+  </action>
+  <action name="actionSaturation">
+   <property name="text">
+    <string>Saturation</string>
+   </property>
+  </action>
+  <action name="actionInvert">
+   <property name="text">
+    <string>Invert colors</string>
+   </property>
+  </action>
+  <action name="actionAddition">
+   <property name="text">
+    <string>Addition</string>
+   </property>
+  </action>
+  <action name="actionSubtraction">
+   <property name="text">
+    <string>Subtraction</string>
+   </property>
+  </action>
+  <action name="actionMultiplication">
+   <property name="text">
+    <string>Multiplication</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Undo</string>
    </property>
   </action>
  </widget>
